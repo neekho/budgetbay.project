@@ -15,7 +15,7 @@ import org.budgetbay.statemachine.OrderStatus;
 @EqualsAndHashCode(callSuper = false)
 public class Orders extends Resource {
 
-    //private User userId;
+    private String userId;
 
     @Column(name = "TOTAL_PRICE", nullable = false)
     private double totalPrice;

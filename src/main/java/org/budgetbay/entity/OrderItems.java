@@ -3,6 +3,9 @@ package org.budgetbay.entity;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,9 +16,13 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class OrderItems extends PanacheEntity {
 
-    //private Orders orderId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ORDER_ID", nullable = false)
+    private Orders orderId;
 
-    //private Products userId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "PRODUCT_ID", nullable = false)
+    private Products userId;
 
     @Column(name = "QUANTITY", nullable = false)
     private int quantity;
