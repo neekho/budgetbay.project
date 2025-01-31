@@ -1,8 +1,9 @@
 package org.budgetbay.rest.service;
 
-import org.budgetbay.rest.dto.user.UserResponse;
+import org.budgetbay.rest.dto.user.UserProfileResponse;
 
 public interface UserApi {
 
-    UserResponse profile();
+
+    UserProfileResponse profile();
 }

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class UserResponse {
+public class UserProfileResponse {
 
     private int id;
 

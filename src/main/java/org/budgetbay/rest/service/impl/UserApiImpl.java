@@ -1,17 +1,23 @@
 package org.budgetbay.rest.service.impl;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 import org.budgetbay.configuration.properties.UserConfigProperties;
-import org.budgetbay.rest.dto.user.UserResponse;
+import org.budgetbay.rest.dto.user.UserProfileResponse;
 import org.budgetbay.rest.service.UserApi;
 
+@Slf4j
+@ApplicationScoped
 public class UserApiImpl implements UserApi {
 
     @Inject
-    private UserConfigProperties userConfigProperties;
+    UserConfigProperties userConfigProperties;
 
     @Override
-    public UserResponse profile() {
+    public UserProfileResponse profile() {
+        //make POST request to USER microservice, to the profile/{id} resource
+        log.info("[/profile] getting user profile");
         return null;
     }
 }
