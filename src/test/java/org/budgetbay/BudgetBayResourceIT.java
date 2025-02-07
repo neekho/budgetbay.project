@@ -3,5 +3,5 @@ package org.budgetbay;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 @QuarkusIntegrationTest
-class GreetingResourceIT extends GreetingResourceTest {
+class BudgetBayResourceIT extends BudgetBayResourceTest {
 }
