@@ -16,9 +16,6 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 public class UserApiImpl implements UserApi {
 
     @Inject
-    UserConfigProperties userConfigProperties;
-
-    @Inject
     @RestClient
     UserService userService;
 
@@ -27,9 +24,7 @@ public class UserApiImpl implements UserApi {
         log.info("[/profile] getting user profile");
 
         String userId = "1";
-        String profileUrl = userConfigProperties.getProfile().replace("{id}", userId);
 
-        // Make the POST request
         UserProfileResponse response = userService.getUserProfile(userId);
         log.info("User profile retrieved: {}", response);
 
