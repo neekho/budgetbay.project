@@ -10,20 +10,20 @@ import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.budgetbay.rest.service.UserApi;
+import org.budgetbay.service.UserService;
 
-@Slf4j
 @Path("/v1/budgetBay/")
 @RequiredArgsConstructor
 public class BudgetBayController {
 
     @Inject
-    private UserApi userApi;
+    private UserService userService;
 
     @GET
     @Path("/user/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response printConfig(@PathParam("id") String id) {
 
-        return Response.ok(userApi.profile(id)).build();
+        return Response.ok(userService.requestUserProfile(id)).build();
     }
 }
