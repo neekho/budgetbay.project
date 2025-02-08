@@ -4,6 +4,6 @@ import org.budgetbay.rest.dto.user.UserProfileResponse;
 
 public interface UserApi {
 
+    UserProfileResponse profile(String id);
 
-    UserProfileResponse profile();
 }

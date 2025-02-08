@@ -20,16 +20,13 @@ public class UserApiImpl implements UserApi {
     UserService userService;
 
     @Override
-    public UserProfileResponse profile() {
+    public UserProfileResponse profile(String id) {
         log.info("[/profile] getting user profile");
 
-        String userId = "1";
-
-        UserProfileResponse response = userService.getUserProfile(userId);
+        UserProfileResponse response = userService.getUserProfile(id);
         log.info("User profile retrieved: {}", response);
 
         return response;
-
 
     }
 }

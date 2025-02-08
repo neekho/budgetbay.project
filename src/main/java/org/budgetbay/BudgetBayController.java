@@ -3,10 +3,13 @@ package org.budgetbay;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.budgetbay.rest.service.impl.UserApiImpl;
+import org.budgetbay.rest.service.UserApi;
 
 @Slf4j
 @Path("/v1/budgetBay/")
@@ -14,13 +17,13 @@ import org.budgetbay.rest.service.impl.UserApiImpl;
 public class BudgetBayController {
 
     @Inject
-    private UserApiImpl userApi;
+    private UserApi userApi;
 
     @GET
-    @Path("/test")
-    public Response printConfig() {
+    @Path("/user/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response printConfig(@PathParam("id") String id) {
 
-        userApi.profile();
-        return Response.ok("Config printed in logs").build();
+        return Response.ok(userApi.profile(id)).build();
     }
 }
