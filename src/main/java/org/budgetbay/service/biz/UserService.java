@@ -1,4 +1,4 @@
-package org.budgetbay.service;
+package org.budgetbay.service.biz;
 
 import jakarta.ws.rs.PathParam;
 import org.budgetbay.rest.dto.user.UserProfileResponse;

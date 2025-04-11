@@ -1,4 +1,4 @@
-package org.budgetbay.service.impl;
+package org.budgetbay.service.biz.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.budgetbay.rest.dto.user.UserProfileResponse;
 import org.budgetbay.rest.service.UserApi;
-import org.budgetbay.service.UserService;
+import org.budgetbay.service.biz.UserService;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @Slf4j
