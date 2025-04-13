@@ -1,8 +1,10 @@
 package org.budgetbay.service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.budgetbay.repository.ProductsRepository;
 import org.budgetbay.rest.api.ProductsRequest;
 import org.budgetbay.rest.api.ProductsResponse;
 import org.budgetbay.service.ProductService;
@@ -12,9 +14,14 @@ import org.budgetbay.service.ProductService;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
+	@Inject
+	private ProductsRepository productsRepository;
+
 	@Override
 	public ProductsResponse productsResponse(ProductsRequest productsRequest) {
-		//actual logic of api
-		return new ProductsResponse("returning all products");
+
+		log.info("querying database for products");
+
+		return new ProductsResponse(productsRepository.getAllProducts());
 	}
 }
