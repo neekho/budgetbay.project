@@ -6,7 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ProductsRequest {
-	//payload or request body for product request...
 
-	private String example;
+	public Long id;
+
+	private String productName;
 }

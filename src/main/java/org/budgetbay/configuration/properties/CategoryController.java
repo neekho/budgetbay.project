@@ -17,19 +17,19 @@ public class CategoryController {
 	@Inject
 	private CategoryService categoryService;
 
+	@GET
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public CategoryResponse categories() {
+		return categoryService.categories();
+	}
+
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public CategoryResponse categories(CategoryRequest request) {
+	public CategoryResponse categoryByName(CategoryRequest request) {
 		return categoryService.categories(request);
-	}
-
-	@POST
-	@Path("/{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public CategoryResponse categoryById(CategoryRequest request) {
-		return categoryService.categoryById(request);
 	}
 }

@@ -2,6 +2,7 @@ package org.budgetbay.service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.budgetbay.entity.Categories;
 import org.budgetbay.repository.CategoryRepository;
@@ -20,23 +21,27 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryRepository categoryRepository;
 
 	@Override
-	public CategoryResponse categoryById(CategoryRequest categoryRequest) {
+	public CategoryResponse categories() {
 
-		Optional<Categories> categoriesOptional = categoryRepository.getProductById(categoryRequest.getId());
+		List<Categories> categoriesList = categoryRepository.getAllCategories();
 
 		return CategoryResponse.builder()
-			.categoryName(categoriesOptional.get().getCategoryName())
-			.description(categoriesOptional.get().getDescription())
+			.categoriesList(categoriesList)
 			.build();
 	}
 
 	@Override
 	public CategoryResponse categories(CategoryRequest categoryRequest) {
 
-		List<Categories> categoriesList = categoryRepository.getAllProducts();
+		Optional<Categories> categoriesOptional = categoryRepository.getCategoryByName(categoryRequest.getCategory());
+		log.info("request payload: {}, {}", categoryRequest.getId(), categoryRequest.getCategory());
 
-		return CategoryResponse.builder()
-			.categoriesList(categoriesList)
-			.build();
+		return categoriesOptional
+			.map(category -> CategoryResponse.builder()
+				.categoryName(category.getCategoryName())
+				.description(category.getDescription())
+				.build())
+			.orElseThrow(() -> new NotFoundException("Category not found"));
 	}
+
 }

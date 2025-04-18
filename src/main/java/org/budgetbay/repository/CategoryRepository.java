@@ -10,13 +10,16 @@ import java.util.Optional;
 @ApplicationScoped
 public class CategoryRepository implements PanacheRepository<Categories> {
 
-    public List<Categories> getAllProducts() {
+    public List<Categories> getAllCategories() {
         return listAll();
     }
 
-    public Optional<Categories> getProductById(Long id) {
+    public Optional<Categories> getCategoryById(Long id) {
         return findByIdOptional(id);
     }
 
+    public Optional<Categories> getCategoryByName(String label) {
+        return find("categoryName", label).firstResultOptional();
+    }
 
 }
