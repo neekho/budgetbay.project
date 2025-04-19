@@ -21,9 +21,22 @@ public class ProductServiceImpl implements ProductService {
 	@Inject
 	private ProductsRepository productsRepository;
 
+	@Override
+	public ProductsResponse add(ProductsRequest request) {
+
+		// take in new product info base on request (new dto for this?)
+
+		// additional INSERT query in repo layer
+
+		// what response to return if any?
+
+		return ProductsResponse.builder()
+			.build();
+
+	}
 
 	@Override
-	public ProductsResponse getProducts() {
+	public ProductsResponse get() {
 
 		log.info("querying database for products");
 
@@ -38,17 +51,16 @@ public class ProductServiceImpl implements ProductService {
 						.build())
 					.toList()
 			)
-			.build();
-	}
+			.build();	}
 
 	@Override
-	public ProductsResponse getProducts(ProductsRequest productsRequest) {
+	public ProductsResponse get(ProductsRequest request) {
 
-		List<Products> products = productsRepository.getProductByName(productsRequest.getProductName());
-		log.info("request payload: {}, {}", productsRequest.getId(), productsRequest.getProductName());
+		List<Products> products = productsRepository.getProductByName(request.getProductName());
+		log.info("request payload: {}, {}", request.getId(), request.getProductName());
 
 		if (products.isEmpty()) {
-			throw new WebApplicationException("No products found matching: " + productsRequest.getProductName(), Response.Status.NOT_FOUND);
+			throw new WebApplicationException("No products found matching: " + request.getProductName(), Response.Status.NOT_FOUND);
 		}
 
 		List<ProductDTO> productDTO = products.stream()
@@ -66,17 +78,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductsResponse add(ProductsRequest request) {
+	public ProductsResponse update(ProductsRequest request) {
+		return null;
+	}
 
-		// take in new product info base on request (new dto for this?)
-
-		// additional INSERT query in repo layer
-
-		// what response to return if any?
-
-		return ProductsResponse.builder()
-			.build();
-
+	@Override
+	public ProductsResponse delete(ProductsRequest request) {
+		return null;
 	}
 
 }

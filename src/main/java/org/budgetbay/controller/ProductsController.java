@@ -21,7 +21,7 @@ public class ProductsController {
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProductsResponse products() {
-		return productService.getProducts();
+		return productService.get();
 	}
 
 	@POST
@@ -29,18 +29,15 @@ public class ProductsController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProductsResponse productByName(ProductsRequest request) {
-		return productService.getProducts(request);
+		return productService.get(request);
 	}
 
 	@POST
-	@Path("/")
+	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProductsResponse add(ProductsRequest request) {
-		return productService.getProducts(request);
+		return productService.add(request);
 	}
-
-
-
 
 }

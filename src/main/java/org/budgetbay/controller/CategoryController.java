@@ -22,7 +22,7 @@ public class CategoryController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public CategoryResponse categories() {
-		return categoryService.categories();
+		return categoryService.get();
 	}
 
 	@POST
@@ -30,6 +30,6 @@ public class CategoryController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public CategoryResponse categoryByName(CategoryRequest request) {
-		return categoryService.categories(request);
+		return categoryService.get(request);
 	}
 }
