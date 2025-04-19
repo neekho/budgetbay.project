@@ -18,7 +18,7 @@ public class ProductsRepository implements PanacheRepository<Products> {
         return findByIdOptional(id);
     }
 
-    public Optional<Products> getProductByName(String label) {
-        return find("productName", label).firstResultOptional();
+    public List<Products> getProductByName(String label) {
+        return list("LOWER(productName) LIKE LOWER(?1)", "%" + label + "%");
     }
 }

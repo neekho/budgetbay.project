@@ -2,7 +2,8 @@ package org.budgetbay.service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.budgetbay.entity.Products;
@@ -11,7 +12,7 @@ import org.budgetbay.rest.api.ProductsRequest;
 import org.budgetbay.rest.api.ProductsResponse;
 import org.budgetbay.service.ProductService;
 
-import java.util.Optional;
+import java.util.List;
 
 @Slf4j
 @ApplicationScoped
@@ -35,14 +36,16 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductsResponse getProducts(ProductsRequest productsRequest) {
 
-		Optional<Products> productsOptional = productsRepository.getProductByName(productsRequest.getProductName());
+		List<Products> products = productsRepository.getProductByName(productsRequest.getProductName());
 		log.info("request payload: {}, {}", productsRequest.getId(), productsRequest.getProductName());
 
-		return productsOptional
-			.map(category -> ProductsResponse.builder()
-				.products(productsOptional.stream().toList())
-				.build())
-			.orElseThrow(() -> new NotFoundException("Product not found"));
+		if (products.isEmpty()) {
+			throw new WebApplicationException("No products found matching: " + productsRequest.getProductName(), Response.Status.NOT_FOUND);
+		}
+
+		return ProductsResponse.builder()
+			.products(products)
+			.build();
 	}
 
 }
