@@ -4,7 +4,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.budgetbay.entity.Products;
 import org.budgetbay.repository.ProductsRepository;
@@ -17,11 +16,11 @@ import org.budgetbay.rest.api.ProductsResponse.ProductDTO;
 
 @Slf4j
 @ApplicationScoped
-@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
 	@Inject
 	private ProductsRepository productsRepository;
+
 
 	@Override
 	public ProductsResponse getProducts() {
@@ -64,6 +63,20 @@ public class ProductServiceImpl implements ProductService {
 		return ProductsResponse.builder()
 			.products(productDTO)
 			.build();
+	}
+
+	@Override
+	public ProductsResponse add(ProductsRequest request) {
+
+		// take in new product info base on request (new dto for this?)
+
+		// additional INSERT query in repo layer
+
+		// what response to return if any?
+
+		return ProductsResponse.builder()
+			.build();
+
 	}
 
 }

@@ -4,6 +4,7 @@ import org.budgetbay.rest.api.ProductsRequest;
 import org.budgetbay.rest.api.ProductsResponse;
 
 public interface ProductService {
+	ProductsResponse add(ProductsRequest request);
 	ProductsResponse getProducts();
-	ProductsResponse getProducts(ProductsRequest productsRequest);
+	ProductsResponse getProducts(ProductsRequest request);
 }
