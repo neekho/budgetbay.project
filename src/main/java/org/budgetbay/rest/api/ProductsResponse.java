@@ -2,7 +2,6 @@ package org.budgetbay.rest.api;
 
 import lombok.Builder;
 import lombok.Data;
-import org.budgetbay.entity.Products;
 
 import java.util.List;
 
@@ -10,6 +9,20 @@ import java.util.List;
 @Builder
 public class ProductsResponse {
 
-	private List<Products> products;
+	private List<ProductDTO> products;
+
+	@Data
+	@Builder
+	public static class ProductDTO {
+
+		private Long id;
+
+		private String productName;
+
+		private String productDescription;
+
+		private Double price;
+
+	}
 
 }

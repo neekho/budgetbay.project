@@ -13,6 +13,7 @@ import org.budgetbay.rest.api.ProductsResponse;
 import org.budgetbay.service.ProductService;
 
 import java.util.List;
+import org.budgetbay.rest.api.ProductsResponse.ProductDTO;
 
 @Slf4j
 @ApplicationScoped
@@ -28,9 +29,17 @@ public class ProductServiceImpl implements ProductService {
 		log.info("querying database for products");
 
 		return ProductsResponse.builder()
-			.products(productsRepository.getAllProducts())
+			.products(
+				productsRepository.getAllProducts().stream()
+					.map(p -> ProductDTO.builder()
+						.id(p.id)
+						.productName(p.getProductName())
+						.productDescription(p.getDescription())
+						.price(p.getPrice())
+						.build())
+					.toList()
+			)
 			.build();
-
 	}
 
 	@Override
@@ -43,8 +52,17 @@ public class ProductServiceImpl implements ProductService {
 			throw new WebApplicationException("No products found matching: " + productsRequest.getProductName(), Response.Status.NOT_FOUND);
 		}
 
+		List<ProductDTO> productDTO = products.stream()
+			.map(p -> ProductDTO.builder()
+				.id(p.id)
+				.productName(p.getProductName())
+				.productDescription(p.getDescription())
+				.price(p.getPrice())
+				.build())
+			.toList();
+
 		return ProductsResponse.builder()
-			.products(products)
+			.products(productDTO)
 			.build();
 	}
 

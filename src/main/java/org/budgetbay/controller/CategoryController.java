@@ -1,4 +1,4 @@
-package org.budgetbay.configuration.properties;
+package org.budgetbay.controller;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
