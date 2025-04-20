@@ -124,14 +124,10 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 	@Transactional
 	public ProductsResponse patch(ProductPatchRequest request) {
 
-		if (request.getId() == null)
-			throw new WebApplicationException("Product ID is required", Response.Status.BAD_REQUEST);
-
 		Products existing = productsRepository.findById(request.getId());
 
 		if (existing == null)
 			throw new WebApplicationException("Product not found", Response.Status.NOT_FOUND);
-
 
 		if (request.getProductName() != null) {
 			if (request.getProductName().isBlank())
