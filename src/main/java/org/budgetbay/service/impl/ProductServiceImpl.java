@@ -2,6 +2,7 @@ package org.budgetbay.service.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
@@ -22,15 +23,29 @@ public class ProductServiceImpl implements ProductService {
 	private ProductsRepository productsRepository;
 
 	@Override
+	@Transactional
 	public ProductsResponse add(ProductsRequest request) {
 
-		// take in new product info base on request (new dto for this?)
+		double price = request.getPrice() != null ? request.getPrice() : 0.0;
+		int stock = request.getStock() != null ? request.getStock() : 0;
 
-		// additional INSERT query in repo layer
+		Products product = new Products();
+		product.setProductName(request.getProductName());
+		product.setDescription(request.getDescription());
+		product.setPrice(price);
+		product.setStock(stock);
+		product.setImageUrl(request.getImageUrl());
 
-		// what response to return if any?
+		productsRepository.persist(product);
+
+		ProductDTO dto = ProductDTO.builder()
+			.id(product.id)
+			.productName(product.getProductName())
+			.productDescription(product.getDescription())
+			.build();
 
 		return ProductsResponse.builder()
+			.products(List.of(dto))
 			.build();
 
 	}
@@ -84,7 +99,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductsResponse delete(ProductsRequest request) {
-		return null;
+
+		productsRepository.deleteById(request.getId());
+
+		return ProductsResponse.builder()
+			.build();
 	}
 
 }

@@ -25,7 +25,7 @@ public class Products extends Resource {
     @Column(name = "STOCK", nullable = false)
     private int stock;
 
-    @Column(name = "IMAGE_URL", nullable = false)
+    @Column(name = "IMAGE_URL", nullable = true)
     private String imageUrl;
 
 }

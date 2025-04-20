@@ -1,7 +1,9 @@
 package org.budgetbay.controller;
 
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -17,6 +19,14 @@ public class ProductsController {
 	@Inject
 	private ProductService productService;
 
+	@POST
+	@Path("/add")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ProductsResponse add(@Valid ProductsRequest request) {
+		return productService.add(request);
+	}
+
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -28,16 +38,24 @@ public class ProductsController {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public ProductsResponse productByName(ProductsRequest request) {
+	public ProductsResponse productByName(@Valid ProductsRequest request) {
 		return productService.get(request);
 	}
 
 	@POST
-	@Path("/add")
+	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public ProductsResponse add(ProductsRequest request) {
-		return productService.add(request);
+	public ProductsResponse update(@Valid ProductsRequest request) {
+		return productService.update(request);
+	}
+
+	@DELETE
+	@Path("/delete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ProductsResponse delete(@Valid ProductsRequest request) {
+		return productService.delete(request);
 	}
 
 }
