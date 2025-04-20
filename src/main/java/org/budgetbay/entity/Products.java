@@ -23,7 +23,7 @@ public class Products extends Resource {
     private double price;
 
     @Column(name = "STOCK", nullable = false)
-    private int stock;
+    private Integer stock;
 
     @Column(name = "IMAGE_URL", nullable = true)
     private String imageUrl;

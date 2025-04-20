@@ -57,7 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public CategoryResponse delete(CategoryRequest request) {
+	public Response delete(CategoryRequest request) {
 		return null;
 	}
 }

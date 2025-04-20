@@ -1,4 +1,4 @@
-package org.budgetbay.rest.api;
+package org.budgetbay.rest.api.products;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
