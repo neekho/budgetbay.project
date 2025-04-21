@@ -1,12 +1,14 @@
 package org.budgetbay.rest.api;
 
-import lombok.Data;
+import jakarta.validation.constraints.NotNull;
 
-@Data
-public class CategoryRequest {
+public record CategoryRequest (
 
-	private Long id;
+	 Long id,
 
-	private String category;
+	 @NotNull
+	 String categoryName,
 
-}
+	 String description
+
+) {}

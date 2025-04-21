@@ -2,7 +2,7 @@ package org.budgetbay.rest.api;
 
 import lombok.Builder;
 import lombok.Data;
-import org.budgetbay.entity.Categories;
+import org.budgetbay.entity.Category;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
 @Builder
 public class CategoryResponse {
 
-	private List<Categories> categoriesList;
+	private List<Category> categoriesList;
 
 
 }

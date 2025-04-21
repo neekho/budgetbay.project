@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "PRODUCTS")
 @EqualsAndHashCode(callSuper = false)
-public class Products extends Resource {
+public class Product extends Resource {
 
     @Column(name = "PRODUCT_NAME", nullable = false)
     private String productName;

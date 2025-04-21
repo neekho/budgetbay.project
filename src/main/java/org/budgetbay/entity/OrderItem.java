@@ -14,15 +14,15 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "ORDER_ITEMS")
 @EqualsAndHashCode(callSuper = false)
-public class OrderItems extends PanacheEntity {
+public class OrderItem extends PanacheEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ORDER_ID", nullable = false)
-    private Orders orderId;
+    private Order orderId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PRODUCT_ID", nullable = false)
-    private Products userId;
+    private Product userId;
 
     @Column(name = "QUANTITY", nullable = false)
     private int quantity;

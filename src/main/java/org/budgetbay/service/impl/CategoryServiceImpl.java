@@ -5,7 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
-import org.budgetbay.entity.Categories;
+import org.budgetbay.entity.Category;
 import org.budgetbay.repository.CategoryRepository;
 import org.budgetbay.rest.api.CategoryRequest;
 import org.budgetbay.rest.api.CategoryResponse;
@@ -22,13 +22,22 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryResponse add(CategoryRequest request) {
-		return null;
+
+		Category category = new Category();
+		category.setCategoryName(request.categoryName());
+		category.setDescription(request.description());
+
+		categoryRepository.persist(category);
+
+		return CategoryResponse.builder()
+			.build();
+
 	}
 
 	@Override
 	public CategoryResponse get() {
 
-		List<Categories> categoriesList = categoryRepository.getAllCategories();
+		List<Category> categoriesList = categoryRepository.getAllCategories();
 
 		return CategoryResponse.builder()
 			.categoriesList(categoriesList)
@@ -38,12 +47,12 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategoryResponse get(CategoryRequest request) {
 
-		List<Categories> categories = categoryRepository.getCategoryByName(request.getCategory());
+		List<Category> categories = categoryRepository.getCategoryByName(request.categoryName());
 
-		log.info("Searching for category with label: {}", request.getCategory());
+		log.info("Searching for category with label: {}", request.categoryName());
 
 		if (categories.isEmpty()) {
-			throw new WebApplicationException("No categories found matching: " + request.getCategory(), Response.Status.NOT_FOUND);
+			throw new WebApplicationException("No categories found matching: " + request.categoryName(), Response.Status.NOT_FOUND);
 		}
 
 		return CategoryResponse.builder()
@@ -53,11 +62,26 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryResponse update(CategoryRequest request) {
-		return null;
+
+		Category existingCategory = categoryRepository.findById(request.id());
+
+		if (existingCategory == null)
+			throw new WebApplicationException("Category not found", Response.Status.NOT_FOUND);
+
+		existingCategory.setCategoryName(request.categoryName());
+		existingCategory.setDescription(request.description());
+
+		return CategoryResponse.builder()
+			.categoriesList(List.of(existingCategory))
+			.build();
 	}
 
 	@Override
 	public Response delete(CategoryRequest request) {
-		return null;
-	}
+
+		log.info("Removing category with id of ", request.id());
+
+		categoryRepository.deleteById(request.id());
+
+		return Response.status(Response.Status.NO_CONTENT).build();	}
 }

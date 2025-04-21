@@ -6,7 +6,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
-import org.budgetbay.entity.Products;
+import org.budgetbay.entity.Product;
 import org.budgetbay.repository.ProductsRepository;
 import org.budgetbay.rest.api.products.ProductPatchRequest;
 import org.budgetbay.rest.api.products.ProductsRequest;
@@ -30,7 +30,7 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 		double price = request.getPrice() != null ? request.getPrice() : 0.0;
 		int stock = request.getStock() != null ? request.getStock() : 0;
 
-		Products product = new Products();
+		Product product = new Product();
 		product.setProductName(request.getProductName());
 		product.setDescription(request.getDescription());
 		product.setPrice(price);
@@ -67,12 +67,13 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 						.build())
 					.toList()
 			)
-			.build();	}
+			.build();
+	}
 
 	@Override
 	public ProductsResponse get(ProductsRequest request) {
 
-		List<Products> products = productsRepository.getProductByName(request.getProductName());
+		List<Product> products = productsRepository.getProductByName(request.getProductName());
 		log.info("request payload: {}, {}", request.getId(), request.getProductName());
 
 		if (products.isEmpty()) {
@@ -97,7 +98,7 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 	@Transactional
 	public ProductsResponse update(ProductsRequest request) {
 
-		Products existingProduct = productsRepository.findById(request.getId());
+		Product existingProduct = productsRepository.findById(request.getId());
 
 		if (existingProduct == null)
 			throw new WebApplicationException("Product not found", Response.Status.NOT_FOUND);
@@ -124,7 +125,7 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 	@Transactional
 	public ProductsResponse patch(ProductPatchRequest request) {
 
-		Products existing = productsRepository.findById(request.getId());
+		Product existing = productsRepository.findById(request.getId());
 
 		if (existing == null)
 			throw new WebApplicationException("Product not found", Response.Status.NOT_FOUND);

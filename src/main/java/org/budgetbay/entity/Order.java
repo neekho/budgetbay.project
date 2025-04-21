@@ -13,7 +13,7 @@ import org.budgetbay.statemachine.OrderStatus;
 @Entity
 @Table(name = "ORDERS")
 @EqualsAndHashCode(callSuper = false)
-public class Orders extends Resource {
+public class Order extends Resource {
 
     private String userId;
 

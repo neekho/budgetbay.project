@@ -2,23 +2,23 @@ package org.budgetbay.repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.budgetbay.entity.Products;
+import org.budgetbay.entity.Product;
 
 import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
-public class ProductsRepository implements PanacheRepository<Products> {
+public class ProductsRepository implements PanacheRepository<Product> {
 
-    public List<Products> getAllProducts() {
+    public List<Product> getAllProducts() {
         return listAll();
     }
 
-    public Optional<Products> getProductById(Long id) {
+    public Optional<Product> getProductById(Long id) {
         return findByIdOptional(id);
     }
 
-    public List<Products> getProductByName(String label) {
+    public List<Product> getProductByName(String label) {
         return list("LOWER(productName) LIKE LOWER(?1)", "%" + label + "%");
     }
 }

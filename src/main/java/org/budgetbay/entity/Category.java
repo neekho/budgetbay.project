@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "CATEGORIES")
 @EqualsAndHashCode(callSuper = false)
-public class Categories extends Resource {
+public class Category extends Resource {
 
     @Column(name = "CATEGORY_NAME", nullable = false, updatable = false)
     private String categoryName;

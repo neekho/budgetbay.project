@@ -19,7 +19,7 @@ public class Cart extends Resource {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID", nullable = false)
-    private Products productId;
+    private Product productId;
 
     @Column(name = "QUANTITY", nullable = false)
     private int quantity;

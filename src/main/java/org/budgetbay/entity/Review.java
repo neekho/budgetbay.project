@@ -13,11 +13,11 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "REVIEWS")
 @EqualsAndHashCode(callSuper = false)
-public class Reviews extends Resource {
+public class Review extends Resource {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID", nullable = false)
-    private Products productId;
+    private Product productId;
 
     private String userId;
 
