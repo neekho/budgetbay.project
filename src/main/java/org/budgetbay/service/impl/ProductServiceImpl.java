@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.budgetbay.entity.Product;
 import org.budgetbay.repository.ProductsRepository;
+import org.budgetbay.rest.api.mapper.ProductDTOMapper;
 import org.budgetbay.rest.api.products.ProductPatchRequest;
 import org.budgetbay.rest.api.products.ProductsRequest;
 import org.budgetbay.rest.api.products.ProductsResponse;
@@ -22,6 +23,9 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 
 	@Inject
 	private ProductsRepository productsRepository;
+
+	@Inject
+	private ProductDTOMapper productDTOMapper;
 
 	@Override
 	@Transactional
@@ -39,11 +43,7 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 
 		productsRepository.persist(product);
 
-		ProductDTO dto = ProductDTO.builder()
-			.id(product.id)
-			.productName(product.getProductName())
-			.productDescription(product.getDescription())
-			.build();
+		ProductDTO dto = productDTOMapper.apply(product);
 
 		return ProductsResponse.builder()
 			.products(List.of(dto))
@@ -59,12 +59,7 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 		return ProductsResponse.builder()
 			.products(
 				productsRepository.getAllProducts().stream()
-					.map(p -> ProductDTO.builder()
-						.id(p.id)
-						.productName(p.getProductName())
-						.productDescription(p.getDescription())
-						.price(p.getPrice())
-						.build())
+					.map(productDTOMapper)
 					.toList()
 			)
 			.build();
@@ -81,12 +76,7 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 		}
 
 		List<ProductDTO> productDTO = products.stream()
-			.map(p -> ProductDTO.builder()
-				.id(p.id)
-				.productName(p.getProductName())
-				.productDescription(p.getDescription())
-				.price(p.getPrice())
-				.build())
+			.map(productDTOMapper)
 			.toList();
 
 		return ProductsResponse.builder()

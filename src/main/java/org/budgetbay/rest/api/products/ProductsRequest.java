@@ -20,7 +20,7 @@ public class ProductsRequest {
 	@Size(max = 200, message = "Description can be up to 500 characters long")
 	private String description;
 
-	@NotNull(message = "Price is required")
+//	@NotNull(message = "Price is required")
 	@PositiveOrZero(message = "Price must be zero or a positive value")
 	private Double price;
 
