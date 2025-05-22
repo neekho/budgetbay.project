@@ -2,7 +2,9 @@ package org.budgetbay.rest.api.products;
 
 import lombok.Builder;
 import lombok.Data;
+import org.budgetbay.entity.Review;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -17,11 +19,13 @@ public class ProductsResponse {
 
 		private Long id;
 
+		private List<Review> reviews;
+
 		private String productName;
 
 		private String productDescription;
 
-		private Double price;
+		private BigDecimal price;
 
 	}
 

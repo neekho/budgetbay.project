@@ -2,10 +2,14 @@ package org.budgetbay.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
+import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -20,7 +24,20 @@ public class Product extends Resource {
     private String description;
 
     @Column(name = "PRICE", nullable = false)
-    private double price;
+    private BigDecimal price;
+
+    @ManyToOne
+    @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "id")
+    private Category categoryId;
+
+    @OneToMany(mappedBy = "productId")
+    private List<Review> reviews;
+
+    @OneToMany(mappedBy = "productId")
+    private List<Cart> carts;
+
+    @OneToMany(mappedBy = "productId")
+    private List<OrderItem> orderItems;
 
     @Column(name = "STOCK", nullable = false)
     private Integer stock;

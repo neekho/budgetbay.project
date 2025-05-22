@@ -14,6 +14,7 @@ import org.budgetbay.rest.api.products.ProductsRequest;
 import org.budgetbay.rest.api.products.ProductsResponse;
 import org.budgetbay.service.ProductService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.budgetbay.rest.api.products.ProductsResponse.ProductDTO;
 
@@ -31,7 +32,7 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 	@Transactional
 	public ProductsResponse add(ProductsRequest request) {
 
-		double price = request.getPrice() != null ? request.getPrice() : 0.0;
+		BigDecimal price = request.getPrice() != null ? request.getPrice() : BigDecimal.valueOf(0.0);
 		int stock = request.getStock() != null ? request.getStock() : 0;
 
 		Product product = new Product();
@@ -134,7 +135,7 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 		}
 
 		if (request.getPrice() != null) {
-			if (request.getPrice() < 0.0)
+			if (request.getPrice().compareTo(BigDecimal.ZERO) < 0)
 				throw new WebApplicationException("Price must be zero or positive", 400);
 
 			existing.setPrice(request.getPrice());
@@ -168,7 +169,7 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 	@Transactional
 	public Response delete(ProductsRequest request) {
 
-		log.info("Removing product with id of ", request.getId());
+		log.info("Removing product with id of {}", request.getId());
 
 		productsRepository.deleteById(request.getId());
 

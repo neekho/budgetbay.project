@@ -17,11 +17,15 @@ public class Cart extends Resource {
 
     private String userId;
 
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_ID", nullable = false)
+    @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "id")
     private Product productId;
 
-    @Column(name = "QUANTITY", nullable = false)
-    private int quantity;
+    @Column(name = "QUANTITY")
+    private Integer quantity;
 
 }

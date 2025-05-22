@@ -15,16 +15,20 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Review extends Resource {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_ID", nullable = false)
-    private Product productId;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
     private String userId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "id")
+    private Product productId;
+
     @Column(name = "RATING", nullable = false)
-    private int rating;
+    private Integer rating;
 
     @Column(name = "COMMENT", nullable = false)
     private String comment;
-    
+
 }

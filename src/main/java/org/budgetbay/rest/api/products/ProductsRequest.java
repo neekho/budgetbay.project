@@ -8,6 +8,8 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 public class ProductsRequest {
@@ -22,7 +24,7 @@ public class ProductsRequest {
 
 //	@NotNull(message = "Price is required")
 	@PositiveOrZero(message = "Price must be zero or a positive value")
-	private Double price;
+	private BigDecimal price;
 
 	@Min(value = 0, message = "Stock must be 0 or more")
 	private Integer stock;

@@ -14,6 +14,7 @@ public class ProductDTOMapper implements Function<Product, ProductsResponse.Prod
 
 		return ProductsResponse.ProductDTO.builder()
 			.id(product.id)
+			.reviews(product.getReviews())
 			.productName(product.getProductName())
 			.productDescription(product.getDescription())
 			.price(product.getPrice())

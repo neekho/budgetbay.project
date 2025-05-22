@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class ProductPatchRequest {
 
@@ -15,7 +17,7 @@ public class ProductPatchRequest {
 	private String description;
 
 	@PositiveOrZero(message = "Price must be zero or a positive value")
-	private Double price;
+	private BigDecimal price;
 
 	private Integer stock;
 
