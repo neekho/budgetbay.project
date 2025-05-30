@@ -73,6 +73,9 @@ public class ProductServiceImpl extends AbstractProductService implements Produc
 		log.info("request payload: {}, {}", request.getId(), request.getProductName());
 
 		if (products.isEmpty()) {
+			//TODO
+			// Not showing as a response?
+			// Create JSON response displaying of error
 			throw new WebApplicationException("No products found matching: " + request.getProductName(), Response.Status.NOT_FOUND);
 		}
 

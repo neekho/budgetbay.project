@@ -5,4 +5,5 @@ import org.budgetbay.rest.api.CategoryResponse;
 
 public interface CategoryService extends CrudService<CategoryRequest, CategoryResponse> {
 
+
 }

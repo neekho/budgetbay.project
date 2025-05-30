@@ -31,5 +31,6 @@ public class ValidationExceptionMapper implements ExceptionMapper<ConstraintViol
 				"error", "Validation failed",
 				"details", errors
 			))
-			.build();	}
+			.build();
+	}
 }
