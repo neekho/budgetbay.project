@@ -11,8 +11,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.budgetbay.rest.OrderRequest;
-import org.budgetbay.rest.OrderResponse;
+import org.budgetbay.rest.api.OrderRequest;
+import org.budgetbay.rest.api.OrderResponse;
 import org.budgetbay.service.OrderService;
 
 @Path("/v1/budgetBay/orders")

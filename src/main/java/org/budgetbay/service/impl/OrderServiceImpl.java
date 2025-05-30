@@ -4,8 +4,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import org.budgetbay.repository.OrderRepository;
-import org.budgetbay.rest.OrderRequest;
-import org.budgetbay.rest.OrderResponse;
+import org.budgetbay.rest.api.OrderRequest;
+import org.budgetbay.rest.api.OrderResponse;
 import org.budgetbay.service.OrderService;
 
 @ApplicationScoped

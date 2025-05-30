@@ -1,7 +1,7 @@
 package org.budgetbay.service;
 
-import org.budgetbay.rest.OrderRequest;
-import org.budgetbay.rest.OrderResponse;
+import org.budgetbay.rest.api.OrderRequest;
+import org.budgetbay.rest.api.OrderResponse;
 
 public interface OrderService extends CrudService<OrderRequest, OrderResponse> {
 }

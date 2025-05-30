@@ -1,4 +1,4 @@
-package org.budgetbay.rest;
+package org.budgetbay.rest.api;
 
 public class OrderResponse {
 }
